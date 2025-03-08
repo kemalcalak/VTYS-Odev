@@ -1,9 +1,9 @@
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "../../../components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../components/ui/card"
+import { Input } from "../../../components/ui/input"
+import { Label } from "../../../components/ui/label"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
 
@@ -119,7 +119,7 @@ export default function RegisterPage() {
                   className="absolute right-0 top-0"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
-                  {showPassword ? (
+                  {showConfirmPassword ? (
                     <Eye className="size-4" />
                   ) : (
                     <EyeOff className="size-4" />
