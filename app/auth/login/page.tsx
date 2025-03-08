@@ -1,33 +1,40 @@
-"use client"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Link from "next/link"
-import { Eye, EyeOff } from "lucide-react"
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState("")
-  const [emailError, setEmailError] = useState("")
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setEmail(value)
+    const value = e.target.value;
+    setEmail(value);
     if (!value) {
-      setEmailError("Email is required")
+      setEmailError("Email is required");
     } else if (!validateEmail(value)) {
-      setEmailError("Please enter a valid email address")
+      setEmailError("Please enter a valid email address");
     } else {
-      setEmailError("")
+      setEmailError("");
     }
-  }
+  };
 
   return (
     <div className="flex h-screen w-full items-center justify-center">
@@ -42,9 +49,9 @@ export default function LoginPage() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input 
-                id="email" 
-                placeholder="john@example.com" 
+              <Input
+                id="email"
+                placeholder="john@example.com"
                 type="email"
                 value={email}
                 onChange={handleEmailChange}
@@ -68,9 +75,9 @@ export default function LoginPage() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="size-4" />
-                  ) : (
                     <Eye className="size-4" />
+                  ) : (
+                    <EyeOff className="size-4" />
                   )}
                 </Button>
               </div>
@@ -78,15 +85,20 @@ export default function LoginPage() {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-2">
-          <Button className="w-full" disabled={!!emailError}>Login</Button>
+          <Button className="w-full" disabled={!!emailError}>
+            Login
+          </Button>
           <div className="text-sm text-muted-foreground">
             Don't have an account?{" "}
-            <Link href="/auth/register" className="text-primary hover:underline">
+            <Link
+              href="/auth/register"
+              className="text-primary hover:underline"
+            >
               Register
             </Link>
           </div>
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }

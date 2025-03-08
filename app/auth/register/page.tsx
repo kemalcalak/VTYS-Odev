@@ -123,9 +123,9 @@ export default function RegisterPage() {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="size-4" />
-                  ) : (
                     <Eye className="size-4" />
+                  ) : (
+                    <EyeOff className="size-4" />
                   )}
                 </Button>
               </div>
