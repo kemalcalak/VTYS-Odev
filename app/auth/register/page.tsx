@@ -96,13 +96,10 @@ export default function RegisterPage() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="size-4" />
-                  ) : (
                     <Eye className="size-4" />
+                  ) : (
+                    <EyeOff className="size-4" />
                   )}
-                  <span className="sr-only">
-                    {showPassword ? "Hide password" : "Show password"}
-                  </span>
                 </Button>
               </div>
             </div>
@@ -122,7 +119,7 @@ export default function RegisterPage() {
                   className="absolute right-0 top-0"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
-                  {showConfirmPassword ? (
+                  {showPassword ? (
                     <Eye className="size-4" />
                   ) : (
                     <EyeOff className="size-4" />
