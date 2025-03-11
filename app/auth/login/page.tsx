@@ -75,7 +75,7 @@ export default function LoginPage() {
               <Label htmlFor="email">E-posta</Label>
               <Input 
                 id="email" 
-                placeholder="ahmet@ornek.com" 
+                placeholder="kemalcalak@gmail.com" 
                 type="email"
                 value={email}
                 onChange={handleEmailChange}

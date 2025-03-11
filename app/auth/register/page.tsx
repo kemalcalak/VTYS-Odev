@@ -100,7 +100,7 @@ export default function RegisterPage() {
               <Label htmlFor="name">İsim</Label>
               <Input 
                 id="name" 
-                placeholder="Ahmet Yılmaz" 
+                placeholder="Ali Kemal Çalak" 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -109,7 +109,7 @@ export default function RegisterPage() {
               <Label htmlFor="email">E-posta</Label>
               <Input 
                 id="email" 
-                placeholder="ahmet@ornek.com" 
+                placeholder="kemalcalak@gmail.com" 
                 type="email"
                 value={email}
                 onChange={handleEmailChange}

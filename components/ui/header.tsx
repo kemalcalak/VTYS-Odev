@@ -25,11 +25,10 @@ function Header1() {
     const [isOpen, setOpen] = useState(false);
 
     useEffect(() => {
-        // Check for authentication status by making an API call instead of checking localStorage
         const checkAuthStatus = async () => {
             try {
                 const response = await fetch('/api/profile', {
-                    credentials: 'include', // Important for sending cookies
+                    credentials: 'include',
                 });
                 setIsAuthenticated(response.ok);
             } catch (error) {
@@ -42,7 +41,6 @@ function Header1() {
 
     const handleLogout = async () => {
         try {
-            // Call the logout API to clear the JWT cookie
             await fetch('/api/auth/logout', {
                 method: 'POST',
                 credentials: 'include'
@@ -56,11 +54,23 @@ function Header1() {
 
     return (
         <header className="w-full z-40 fixed top-0 left-0 bg-background bg-black">
-            <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center">
-                <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
-                    <NavigationMenu className="flex justify-start items-start">
-                        <NavigationMenuList className="flex justify-start gap-4 flex-row">
-                            {navigationItems.map((item) => (
+            <div className="container relative mx-auto px-4 py-4 flex items-center justify-between">
+                {/* Ana Sayfa butonu sol üstte */}
+                <div className="flex items-center space-x-4">
+                    <Link href="/">
+                        <Button variant="ghost" className="text-white bg-gray-800 hover:bg-gray-600 mr-2">
+                            Ana Sayfa
+                        </Button>
+                    </Link>
+                    <p className="font-semibold text-lg">TWBlocks</p>
+                </div>
+                
+                {/* Masaüstü için diğer navigation itemlar burada olacak ama Ana Sayfa dışındakiler */}
+                <div className="hidden md:flex items-center justify-center space-x-4">
+                    <NavigationMenu>
+                        <NavigationMenuList className="flex space-x-2">
+                            {/* Eğer ileride başka navigation itemlar eklenecekse burada göster */}
+                            {navigationItems.slice(1).map((item) => (
                                 <NavigationMenuItem key={item.title}>
                                     <NavigationMenuLink href={item.href}>
                                         <Button variant="ghost" className="text-white bg-gray-800 hover:bg-gray-600">{item.title}</Button>
@@ -70,10 +80,9 @@ function Header1() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="flex lg:justify-center">
-                    <p className="font-semibold">TWBlocks</p>
-                </div>
-                <div className="flex justify-end w-full gap-4">
+                
+                {/* Authentication Buttons */}
+                <div className="hidden md:flex items-center space-x-2">
                     {isAuthenticated ? (
                         <>
                             <Link href="/profile">
@@ -100,22 +109,81 @@ function Header1() {
                         </>
                     )}
                 </div>
-                <div className="flex w-12 shrink lg:hidden items-end justify-end">
-                    <Button variant="ghost" onClick={() => setOpen(isOpen=>!isOpen)}>
+                
+                {/* Mobile Menu Button */}
+                <div className="md:hidden">
+                    <Button variant="ghost" onClick={() => setOpen(!isOpen)} className="text-white">
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </Button>
-                    {isOpen && (
-                        <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-background shadow-lg py-4 container gap-8">
-                            {navigationItems.map((item) => (
-                                <div key={item.title}>
-                                    <div className="flex flex-col gap-2">
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
                 </div>
             </div>
+            
+            {isOpen && (
+                <div className="md:hidden bg-black border-t border-gray-700">
+                    <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                        <div className="flex flex-col space-y-2">
+                            {/* Ana Sayfa butonu artık burada gösterilmeyecek çünkü üstte sabit */}
+                            {navigationItems.slice(1).map((item) => (
+                                <Link 
+                                    key={item.title} 
+                                    href={item.href} 
+                                    className="text-white hover:bg-gray-800 px-4 py-2 rounded-md"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    {item.title}
+                                </Link>
+                            ))}
+                        </div>
+                        
+                        <div className="flex flex-col space-y-2 pt-2 border-t border-gray-700">
+                            {isAuthenticated ? (
+                                <>
+                                    <Link 
+                                        href="/profile" 
+                                        onClick={() => setOpen(false)}
+                                        className="w-full"
+                                    >
+                                        <Button variant="outline" className="w-full text-white hover:bg-gray-700">
+                                            Profil
+                                        </Button>
+                                    </Link>
+                                    <Button 
+                                        variant="outline"
+                                        onClick={() => {
+                                            handleLogout();
+                                            setOpen(false);
+                                        }}
+                                        className="w-full text-white bg-primary hover:bg-red-500"
+                                    >
+                                        Çıkış Yap
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link 
+                                        href="/auth/login" 
+                                        onClick={() => setOpen(false)}
+                                        className="w-full"
+                                    >
+                                        <Button variant="outline" className="w-full text-white hover:bg-gray-700">
+                                            Giriş Yap
+                                        </Button>
+                                    </Link>
+                                    <Link 
+                                        href="/auth/register" 
+                                        onClick={() => setOpen(false)}
+                                        className="w-full"
+                                    >
+                                        <Button className="w-full hover:bg-primary/90">
+                                            Kayıt Ol
+                                        </Button>
+                                    </Link>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </header>
     );
 }
