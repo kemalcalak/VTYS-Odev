@@ -1,6 +1,6 @@
 # JWT ile Giriş Kontrolü
 
-Bu proje, Next.js kullanılarak geliştirilen modern bir web uygulamasıdır. Kullanıcı kimlik doğrulama sistemi ve responsive tasarım özellikleriyle donatılmıştır.
+Bu proje, Next.js kullanılarak geliştirilen modern bir web uygulamasıdır. JWT ile kullanıcı kimlik doğrulama sistemi ve responsive tasarım özellikleriyle donatılmıştır.
 
 ## Proje Hakkında
 
