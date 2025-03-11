@@ -62,7 +62,6 @@ function Header1() {
                             Ana Sayfa
                         </Button>
                     </Link>
-                    <p className="font-semibold text-lg">TWBlocks</p>
                 </div>
                 
                 {/* Masaüstü için diğer navigation itemlar burada olacak ama Ana Sayfa dışındakiler */}
