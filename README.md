@@ -104,9 +104,14 @@ VTYS-Odev/
 │   └── profile/        # Profil sayfası
 ├── components/         # Yeniden kullanılabilir bileşenler
 │   └── ui/             # UI bileşenleri (shadcn/ui)
-└── lib/                # Yardımcı fonksiyonlar ve MongoDB bağlantısı
-    └── db/             # MongoDB bağlantı kodları
-    └── models/         # MongoDB şema ve model tanımları
+├── lib/                # Yardımcı fonksiyonlar ve MongoDB bağlantısı
+│   ├── db/             # MongoDB bağlantı kodları
+│   └── models/         # MongoDB şema ve model tanımları
+├── __tests__/          # Jest test dosyaları
+│   ├── components/     # Bileşen testleri
+│   ├── api/            # API testleri
+│   └── integration/    # Entegrasyon testleri
+└── __mocks__/          # Test için mock/sahte modüller
 ```
 
 ## Sayfalar ve Bileşenler
@@ -117,6 +122,49 @@ VTYS-Odev/
 - **/auth/login** - Giriş sayfası
 - **/auth/register** - Kayıt sayfası
 - **/profile** - Kullanıcı profil sayfası (giriş yapılması gerekir)
+
+## Test
+
+### Test Ortamını Kurma
+
+Projenin test ortamını kurmak için aşağıdaki adımları izleyin:
+
+1. Test bağımlılıklarının yüklü olduğundan emin olun:
+   ```bash
+   npm install --save-dev jest @testing-library/react @testing-library/jest-dom
+   ```
+
+2. Test betiklerini çalıştırın:
+   ```bash
+   npm test
+   # veya
+   yarn test
+   ```
+
+### Test Kapsamı
+
+Bu projede aşağıdaki test türleri bulunmaktadır:
+
+- **Birim Testleri**: Bireysel bileşenlerin ve fonksiyonların işlevselliğini test eder
+- **Entegrasyon Testleri**: Birden fazla bileşenin birlikte çalışmasını test eder
+- **API Testleri**: Backend API endpoint'lerinin doğru şekilde çalışıp çalışmadığını kontrol eder
+- **End-to-End Testleri**: Kullanıcı deneyimini simüle ederek tam uygulama akışını test eder
+
+### Test Komutları
+
+```bash
+# Tüm testleri çalıştır
+npm test
+
+# Belirli bir test dosyasını çalıştır
+npm test -- path/to/test-file.test.js
+
+# Coverage raporu oluştur
+npm test -- --coverage
+
+# Watch modunda testleri çalıştır (değişiklikler olduğunda yeniden çalıştırır)
+npm test -- --watch
+```
 
 ## Dağıtım
 
